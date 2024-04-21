@@ -1,6 +1,9 @@
 # Importation des bibliothèques nécessaires
 from datetime import datetime
 
+
+""" ********************************************** Gestion des rendez-vous ********************************************************** """
+
 # Base de données en mémoire pour stocker les rendez-vous
 appointments = []
 
@@ -16,7 +19,8 @@ def view_appointments():
     for appointment in sorted(appointments):
         print(f"{appointment[0].strftime('%d-%m-%Y %H:%M')} - {appointment[1]}")
 
-    """ ************ Gestion des anniversaires ************** """
+
+    """ *************************************** Gestion des anniversaires ******************************************************* """
 
 birthdays = []
 
@@ -34,6 +38,22 @@ def view_birthdays():
             print(f"{birthday[0].strftime('%d - %m')} - {birthday[1]}")
 
 
+""" ******************************************** Gestion des notes personnelles ****************************************************"""
+
+notes = []
+def add_note(title, content):
+    """ Ajoute une nouvelle note à la liste. """
+    note = {'title': title, 'content': content}
+    notes.append(note)
+    print("Note ajoutée avec succès !")
+
+def view_notes():
+    """ Affiche toutes les enregistrées."""
+    if not notes:
+        print("Aucune note enregistrée")
+    else:
+        for note in notes:
+            print(f"Titre: {note['title']}\nContenu: {note['content']}\n")
 def main():
     while True:
         print("\nAgenda Électronique")
@@ -41,7 +61,9 @@ def main():
         print("2. Voir les rendez-vous")
         print("3. Ajouter un anniversaire")
         print("4. Voir les anniversaire")
-        print("5. Quitter")
+        print("5. Ajouter une note")
+        print("6. Voir les notes")
+        print("7. Quitter")
         choice = input("Choisissez une option : ")
         if choice == '1':
             date = input("Entrez la date (JJ-MM-AAAA) : ")
@@ -57,6 +79,12 @@ def main():
         elif choice == '4':
             view_birthdays()
         elif choice == '5':
+            title = input("Entrez le titre de la note :")
+            content = input("Entrez le contenu de la note :")
+            add_note(title, content)
+        elif choice == '6':
+            view_notes()
+        elif choice == '7':
             break
         else:
             print("Option non reconnue, veuillez réessayer.")
